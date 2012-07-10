@@ -10,13 +10,11 @@ class Post(models.Model):
 
     def __unicode__(self):
 	return self.title
-'''    
-    def body_first(self,n):
-	return self.body[:n]
 
+    
     class admin:
 	pass
-'''		
+		
 
 class Comment(models.Model):
     body = models.TextField()
@@ -25,9 +23,17 @@ class Comment(models.Model):
     updated = models.DateField(auto_now=True)
     post = models.ForeignKey(Post)
 
+    
 
     def __unicode__(self):
 	return self.author
+
+    def body_first(self):
+	return self.body[:60]
+
+    
+    class admin:
+	pass
 
 
 class CommentInline(admin.TabularInline):
@@ -41,7 +47,7 @@ class PostAdmin(admin.ModelAdmin):
 	inlines = [CommentInline,]	
 
 class CommentAdmin(admin.ModelAdmin):
-	list_display = ('author','post','created','updated')
+	list_display = ('author','post','body_first','created','updated')
 	list_filter = ('created','author')
 	
 
