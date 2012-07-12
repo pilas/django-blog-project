@@ -12,8 +12,8 @@ class Post(models.Model):
 	return self.title
 
     
-    class admin:
-	pass
+    #class admin:
+	#pass
 		
 
 class Comment(models.Model):
@@ -21,7 +21,7 @@ class Comment(models.Model):
     author =  models.CharField(max_length=60)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now=True)
-    post = models.ForeignKey(Post)
+    post = models.ForeignKey(Post,related_name='comments')
 
     
 
